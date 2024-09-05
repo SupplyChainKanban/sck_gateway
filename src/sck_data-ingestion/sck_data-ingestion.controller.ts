@@ -1,8 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Param, Patch, Post, Query } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
+import { PaginationDto } from 'src/common';
+import { SCK_DATA_INGESTION_MS } from 'src/config';
 
 @Controller('sck-data-ingestion')
 export class SckDataIngestionController {
-  constructor() { }
+  constructor(
+    @Inject(SCK_DATA_INGESTION_MS) private readonly sckDataIngestionClient: ClientProxy,
+  ) { }
 
   @Post('data-source')
   createDataSource() {
@@ -10,8 +15,8 @@ export class SckDataIngestionController {
   }
 
   @Get('data-source')
-  findAllDataSources() {
-    return 'Esta función regresa varios Data Sources'
+  findAllDataSources(@Query() paginationDto: PaginationDto) {
+    return this.sckDataIngestionClient.send({ cmd: 'findAllDataSources' }, paginationDto)
   }
 
   @Get('data-source/:id')
@@ -37,8 +42,8 @@ export class SckDataIngestionController {
   }
 
   @Get('raw-data')
-  findAllRawData() {
-    return 'Esta función regresa varios Raw Data'
+  findAllRawData(@Query() paginationDto: PaginationDto) {
+    return this.sckDataIngestionClient.send({ cmd: 'findAllRawData' }, paginationDto)
   }
 
   @Get('raw-data/:id')
