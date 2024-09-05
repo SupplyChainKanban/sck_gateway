@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Inject, Param, Patch, Post, Query } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Inject, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
+import { firstValueFrom } from 'rxjs';
 import { PaginationDto } from 'src/common';
 import { SCK_DATA_INGESTION_MS } from 'src/config';
 
@@ -20,8 +21,16 @@ export class SckDataIngestionController {
   }
 
   @Get('data-source/:id')
-  findOneDataSource(@Param('id') id: string) {
-    return 'Esta función regresa el data source ' + id;
+  async findOneDataSource(@Param('id', ParseIntPipe) id: number) {
+    try {
+      const dataSource = await firstValueFrom(
+        this.sckDataIngestionClient.send({ cmd: 'findOneDataSource' }, { id })
+      )
+
+      return dataSource;
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
   }
 
   @Delete('data-source/:id')
@@ -47,8 +56,16 @@ export class SckDataIngestionController {
   }
 
   @Get('raw-data/:id')
-  findOneRawData(@Param('id') id: string) {
-    return 'Esta función regresa el raw data ' + id;
+  async findOneRawData(@Param('id', ParseIntPipe) id: number) {
+    try {
+      const rawData = await firstValueFrom(
+        this.sckDataIngestionClient.send({ cmd: 'findOneRawData' }, { id })
+      )
+
+      return rawData;
+    } catch (error) {
+      throw new BadRequestException(error)
+    }
   }
 
   @Delete('raw-data/:id')
