@@ -6,12 +6,16 @@ interface EnvVars {
     PORT: number;
     SCK_DATA_INGESTION_MS_HOST: string;
     SCK_DATA_INGESTION_MS_PORT: number;
+    SCK_DATA_VALIDATION_MS_HOST: string;
+    SCK_DATA_VALIDATION_MS_PORT: number;
 }
 
 const envsSchema = joi.object({
     PORT: joi.number().required(),
     SCK_DATA_INGESTION_MS_HOST: joi.string().required(),
     SCK_DATA_INGESTION_MS_PORT: joi.number().required(),
+    SCK_DATA_VALIDATION_MS_HOST: joi.string().required(),
+    SCK_DATA_VALIDATION_MS_PORT: joi.number().required(),
 })
     .unknown(true);
 
@@ -27,5 +31,7 @@ export const envs = {
     port: envVars.PORT,
     sck_data_ingestion_ms_host: envVars.SCK_DATA_INGESTION_MS_HOST,
     sck_data_ingestion_ms_port: envVars.SCK_DATA_INGESTION_MS_PORT,
+    sck_data_validation_ms_host: envVars.SCK_DATA_VALIDATION_MS_HOST,
+    sck_data_validation_ms_port: envVars.SCK_DATA_VALIDATION_MS_PORT,
 }
 
