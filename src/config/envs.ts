@@ -4,22 +4,19 @@ import * as joi from 'joi';
 
 interface EnvVars {
     PORT: number;
-    SCK_DATA_INGESTION_MS_HOST: string;
-    SCK_DATA_INGESTION_MS_PORT: number;
-    SCK_DATA_VALIDATION_MS_HOST: string;
-    SCK_DATA_VALIDATION_MS_PORT: number;
+    SCK_NATS_SERVERS: string[];
 }
 
 const envsSchema = joi.object({
     PORT: joi.number().required(),
-    SCK_DATA_INGESTION_MS_HOST: joi.string().required(),
-    SCK_DATA_INGESTION_MS_PORT: joi.number().required(),
-    SCK_DATA_VALIDATION_MS_HOST: joi.string().required(),
-    SCK_DATA_VALIDATION_MS_PORT: joi.number().required(),
+    SCK_NATS_SERVERS: joi.array().items(joi.string()).required(),
 })
     .unknown(true);
 
-const { error, value } = envsSchema.validate(process.env);
+const { error, value } = envsSchema.validate({
+    ...process.env,
+    SCK_NATS_SERVERS: process.env.SCK_NATS_SERVERS?.split(','),
+});
 
 if (error) {
     throw new Error(`Config validation error: ${error.message}`);
@@ -29,9 +26,5 @@ const envVars: EnvVars = value;
 
 export const envs = {
     port: envVars.PORT,
-    sck_data_ingestion_ms_host: envVars.SCK_DATA_INGESTION_MS_HOST,
-    sck_data_ingestion_ms_port: envVars.SCK_DATA_INGESTION_MS_PORT,
-    sck_data_validation_ms_host: envVars.SCK_DATA_VALIDATION_MS_HOST,
-    sck_data_validation_ms_port: envVars.SCK_DATA_VALIDATION_MS_PORT,
+    sckNatsServers: envVars.SCK_NATS_SERVERS,
 }
-

@@ -12,8 +12,8 @@ import { envs, SCK_DATA_VALIDATION_MS } from 'src/config';
         name: SCK_DATA_VALIDATION_MS,
         transport: Transport.TCP,
         options: {
-          host: envs.sck_data_validation_ms_host,
-          port: envs.sck_data_validation_ms_port,
+          // host: envs.sck_data_validation_ms_host,
+          // port: envs.sck_data_validation_ms_port,
         }
       }
     ])
