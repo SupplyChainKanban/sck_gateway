@@ -1,8 +1,8 @@
 import { Controller, Post, Body, Inject } from '@nestjs/common';
-import { CreateSckDataValidationDto } from './dto/create-sck_data_validation.dto';
 import { SCK_DATA_VALIDATION_MS } from 'src/config';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { catchError } from 'rxjs';
+import { CreateValidationRuleDto } from './dto';
 import { ValidateDataDto } from './dto/validate_data.dto';
 
 @Controller('sck-data-validation')
@@ -12,8 +12,8 @@ export class SckDataValidationController {
   ) { }
 
   @Post('rule')
-  create(@Body() createSckDataValidationDto: CreateSckDataValidationDto) {
-    return this.sckDataValidationClient.send('createValidationRule', createSckDataValidationDto)
+  create(@Body() createValidationRuleDto: CreateValidationRuleDto) {
+    return this.sckDataValidationClient.send('createValidationRule', createValidationRuleDto)
       .pipe(
         catchError(err => { throw new RpcException(err) })
       )

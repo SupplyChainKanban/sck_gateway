@@ -1,1 +1,4 @@
-export class ValidateDataDto { }
+export class ValidateDataDto {
+
+
+}
