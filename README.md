@@ -22,6 +22,24 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+## Dev
+
+1. Clonar el repositorio
+2. Instalar dependencias
+3. Crear un archivo **.env** basado en el archivo **.env.template**.
+4. Levantar el servidor de NATS
+
+```
+  docker run -d --name nats-main -p 4222:4222 -p 8222:8222 nats
+```
+
+5. Tener levantados todos los microservicios que se van a consultar
+6. Levantar el proyecto con:
+
+```
+  npm run start:dev
+```
+
 ## NATS
 
 - Sin el 62222
