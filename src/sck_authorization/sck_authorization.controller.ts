@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Post, Req, UseGuards } from '@nestjs/common';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { catchError } from 'rxjs';
 import { SCK_NATS_SERVICE } from 'src/config';
 import { LoginUserDto, RegisterUserDto } from './dto';
+import { AuthGuard } from './guards/auth.guard';
 
 @Controller('sck-authorization')
 export class SckAuthorizationController {
@@ -26,8 +27,13 @@ export class SckAuthorizationController {
       )
   }
 
+  @UseGuards(AuthGuard)
   @Get('verify')
-  verifyUser() {
+  verifyUser(@Req() req) {
+
+    const user = req['user'];
+    const token = req['token'];
+    // console.log(req)
     return this.client.send('auth.verify.token', {})
       .pipe(
         catchError(err => { throw new RpcException(err) })
