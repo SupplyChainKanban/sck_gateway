@@ -17,7 +17,9 @@ export class AuthGuard implements CanActivate {
         }
         try {
             request['user'] = {
-
+                id: '1',
+                name: 'Armando',
+                email: 'armando.jaimes@pucp.edu.pe',
             };
 
             request['token'] = token

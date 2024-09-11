@@ -4,6 +4,8 @@ import { catchError } from 'rxjs';
 import { SCK_NATS_SERVICE } from 'src/config';
 import { LoginUserDto, RegisterUserDto } from './dto';
 import { AuthGuard } from './guards/auth.guard';
+import { Token, User } from './decorators';
+import { CurrentUser } from './interfaces/current-user.interface';
 
 @Controller('sck-authorization')
 export class SckAuthorizationController {
@@ -29,15 +31,16 @@ export class SckAuthorizationController {
 
   @UseGuards(AuthGuard)
   @Get('verify')
-  verifyUser(@Req() req) {
+  verifyUser(@User() user: CurrentUser, @Token() token: string) {
 
-    const user = req['user'];
-    const token = req['token'];
+    // const user = req['user'];
+    // const token = req['token'];
     // console.log(req)
-    return this.client.send('auth.verify.token', {})
-      .pipe(
-        catchError(err => { throw new RpcException(err) })
-      )
+    // return this.client.send('auth.verify.token', {})
+    //   .pipe(
+    //     catchError(err => { throw new RpcException(err) })
+    //   )
+    return { user, token };
   }
 
 }
