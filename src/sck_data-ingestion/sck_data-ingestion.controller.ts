@@ -14,77 +14,49 @@ export class SckDataIngestionController {
   @Post('data-source')
   createDataSource(@Body() createDataSourceDto: CreateDataSourceDto) {
     return this.client.send({ cmd: 'createDataSource' }, createDataSourceDto)
-      .pipe(
-        catchError(err => { throw new RpcException(err) })
-      );
+      .pipe(catchError(err => { throw new RpcException(err) }));
   }
 
   @Post('raw-data')
   createRawData(@Body() createRawDataDto: CreateRawDataDto) {
     return this.client.send({ cmd: 'createRawData' }, createRawDataDto)
-      .pipe(
-        catchError(err => { throw new RpcException(err) })
-      )
+      .pipe(catchError(err => { throw new RpcException(err) }));
   }
 
   @Get('data-source')
   findAllDataSources(@Query() paginationDto: PaginationDto) {
     return this.client.send({ cmd: 'findAllDataSources' }, paginationDto)
+      .pipe(catchError(err => { throw new RpcException(err) }));
   }
 
   @Get('raw-data')
   findAllRawData(@Query() paginationDto: PaginationDto) {
     return this.client.send({ cmd: 'findAllRawData' }, paginationDto)
+      .pipe(catchError(err => { throw new RpcException(err) }));
   }
 
   @Get('data-source/:id')
   async findOneDataSource(@Param('id', ParseUUIDPipe) id: string) {
     return this.client.send({ cmd: 'findOneDataSource' }, { id })
-      .pipe(
-        catchError(err => { throw new RpcException(err) })
-      );
-    // try {
-    //   const dataSource = await firstValueFrom(
-    //     this.sckDataIngestionClient.send({ cmd: 'findOneDataSource' }, { id })
-    //   )
-
-    //   return dataSource;
-    // } catch (error) {
-    //   throw new RpcException(error)
-    // }
+      .pipe(catchError(err => { throw new RpcException(err) }));
   }
 
   @Get('raw-data/:id')
-  async findOneRawData(@Param('id', ParseIntPipe) id: number) {
+  async findOneRawData(@Param('id', ParseUUIDPipe) id: string) {
     return this.client.send({ cmd: 'findOneRawData' }, { id })
-      .pipe(
-        catchError(err => { throw new RpcException(err) })
-      );
-    // try {
-    //   const rawData = await firstValueFrom(
-    //     this.sckDataIngestionClient.send({ cmd: 'findOneRawData' }, { id })
-    //   )
-
-    //   return rawData;
-    // } catch (error) {
-    //   throw new BadRequestException(error)
-    // }
+      .pipe(catchError(err => { throw new RpcException(err) }));
   }
 
   @Delete('data-source/:id')
-  deleteDataSource(@Param('id') id: string) {
+  deleteDataSource(@Param('id', ParseUUIDPipe) id: string) {
     return this.client.send({ cmd: 'deleteDataSource' }, { id })
-      .pipe(
-        catchError(err => { throw new RpcException(err) })
-      )
+      .pipe(catchError(err => { throw new RpcException(err) }));
   }
 
   @Delete('raw-data/:id')
-  deleteRawData(@Param('id') id: string) {
+  deleteRawData(@Param('id', ParseUUIDPipe) id: string) {
     return this.client.send({ cmd: 'deleteRawData' }, { id })
-      .pipe(
-        catchError(err => { throw new RpcException(err) })
-      )
+      .pipe(catchError(err => { throw new RpcException(err) }));
   }
 
   @Patch('data-source/:id')
@@ -92,19 +64,14 @@ export class SckDataIngestionController {
     return this.client.send({ cmd: 'updateDataSource' }, {
       id,
       ...updateDataSourceDto,
-    }).pipe(
-      catchError(err => { throw new RpcException(err) })
-    )
+    }).pipe(catchError(err => { throw new RpcException(err) }));
   }
 
   @Patch('raw-data/:id')
-  updateRawData(@Param('id', ParseIntPipe) id: number, @Body() updateRawDataDto: UpdateRawDataDto) {
+  updateRawData(@Param('id', ParseUUIDPipe) id: string, @Body() updateRawDataDto: UpdateRawDataDto) {
     return this.client.send({ cmd: 'updateRawData' }, {
       id,
       ...updateRawDataDto,
-    }).pipe(
-      catchError(err => { throw new RpcException(err) })
-    )
+    }).pipe(catchError(err => { throw new RpcException(err) }));
   }
-
 }
