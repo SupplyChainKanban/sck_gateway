@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Inject, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Param, ParseIntPipe, ParseUUIDPipe, Patch, Post, Query } from '@nestjs/common';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { catchError } from 'rxjs';
 import { PaginationDto } from 'src/common';
@@ -38,7 +38,7 @@ export class SckDataIngestionController {
   }
 
   @Get('data-source/:id')
-  async findOneDataSource(@Param('id', ParseIntPipe) id: number) {
+  async findOneDataSource(@Param('id', ParseUUIDPipe) id: string) {
     return this.client.send({ cmd: 'findOneDataSource' }, { id })
       .pipe(
         catchError(err => { throw new RpcException(err) })
@@ -88,7 +88,7 @@ export class SckDataIngestionController {
   }
 
   @Patch('data-source/:id')
-  updateDataSource(@Param('id', ParseIntPipe) id: number, @Body() updateDataSourceDto: UpdateDataSourceDto) {
+  updateDataSource(@Param('id', ParseUUIDPipe) id: string, @Body() updateDataSourceDto: UpdateDataSourceDto) {
     return this.client.send({ cmd: 'updateDataSource' }, {
       id,
       ...updateDataSourceDto,

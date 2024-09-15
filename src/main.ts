@@ -13,6 +13,7 @@ async function main() {
   app.setGlobalPrefix('api')
   app.useGlobalPipes(
     new ValidationPipe({
+      transform: true,
       whitelist: true,
       forbidNonWhitelisted: true,
     })
