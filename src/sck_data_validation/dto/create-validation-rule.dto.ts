@@ -1,22 +1,23 @@
-import { IsEnum, IsOptional, IsString, IsUUID } from 'class-validator';
-import { Rules, rulesList } from '../enums/rules.enum';
+import { IsEnum, IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
+import { Rules, rulesList } from '../enums/data.enum';
 
 export class CreateValidationRuleDto {
-    // TODO: DESCOMENTAR CUANDO SE TRABAJE CON DATA REAL
-    // @IsUUID()
+    @IsNotEmpty()
     @IsString()
-    sourceId: string;
+    @IsUUID()
+    public sourceId: string;
 
+    @IsNotEmpty()
     @IsString()
-    keyName: string;
+    public keyName: string;
 
     @IsEnum(rulesList, {
         message: `Possible rules values are ${rulesList}`
     })
-    rule: Rules;
+    public rule: Rules;
 
     @IsOptional()
     @IsString()
-    regexPattern?: string;
+    public regexPattern?: string;
 
 }

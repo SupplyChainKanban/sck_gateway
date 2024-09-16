@@ -13,12 +13,12 @@ export const rawPriorityList = [
 
 export enum RawDataStatus {
     PENDING = 'PENDING',
-    PROCESSED = 'PROCESSED',
+    VALIDATED = 'VALIDATED',
     ERROR = 'ERROR',
 }
 
 export const rawStatusList = [
     RawDataStatus.PENDING,
-    RawDataStatus.PROCESSED,
+    RawDataStatus.VALIDATED,
     RawDataStatus.ERROR,
 ]

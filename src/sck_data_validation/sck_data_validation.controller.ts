@@ -3,7 +3,7 @@ import { SCK_NATS_SERVICE } from 'src/config';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { catchError } from 'rxjs';
 import { CreateValidationRuleDto } from './dto';
-import { ValidateDataDto } from './dto/validate_data.dto';
+import { ValidateDataDto } from './dto/validate-data.dto';
 
 @Controller('sck-data-validation')
 export class SckDataValidationController {
@@ -26,5 +26,8 @@ export class SckDataValidationController {
         catchError(err => { throw new RpcException(err) })
       )
   }
+
+  // TODO: Realizar el cambio de estado de validation result
+
 
 }
