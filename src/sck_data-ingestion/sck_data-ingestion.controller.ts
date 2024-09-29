@@ -41,6 +41,12 @@ export class SckDataIngestionController {
       .pipe(catchError(err => { throw new RpcException(err) }));
   }
 
+  @Get('raw-data/seed')
+  async runSeed() {
+    return this.client.emit("rawData.seed", {})
+      .pipe(catchError(err => { throw new RpcException(err) }));
+  }
+
   @Get('raw-data/:id')
   async findOneRawData(@Param('id', ParseUUIDPipe) id: string) {
     return this.client.send({ cmd: 'findOneRawData' }, { id })
