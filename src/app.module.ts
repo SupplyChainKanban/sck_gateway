@@ -4,10 +4,11 @@ import { SckDataValidationModule } from './sck_data_validation/sck_data_validati
 import { TransportsModule } from './transports/transports.module';
 import { SckAuthorizationModule } from './sck_authorization/sck_authorization.module';
 import { SckAnalyticsModule } from './sck_analytics/sck_analytics.module';
+import { SckOrdersModule } from './sck_orders/sck_orders.module';
 
 
 @Module({
-  imports: [SckDataIngestionModule, SckDataValidationModule, TransportsModule, SckAuthorizationModule, SckAnalyticsModule],
+  imports: [SckDataIngestionModule, SckDataValidationModule, TransportsModule, SckAuthorizationModule, SckAnalyticsModule, SckOrdersModule],
   controllers: [],
   providers: [],
 })
