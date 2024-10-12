@@ -26,14 +26,8 @@ export class OrdersWsGateway implements OnGatewayConnection, OnGatewayDisconnect
     this.wss.emit('clients-updated', this.ordersWsService.getConnectedClients())
   }
 
-  // @EventPattern('order.status.changed')
-  // handleOrderStatusChange() {
-  //   console.log('Llegó el order.status.changed')
-  //   this.wss.emit('OrdersChanged', 'Las órdenes se actualizaron')
-  // }
 
   handleOrderStatusChange() {
-    console.log('Llegó el order.status.changed')
     this.wss.emit('OrdersChanged', 'Las órdenes se actualizaron')
   }
 

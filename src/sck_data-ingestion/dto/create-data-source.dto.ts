@@ -3,7 +3,6 @@ import { IsEnum, IsNotEmpty, IsObject, IsOptional, IsString } from "class-valida
 import { DataSourceFrequency, DataSourceStatus, DataSourceType, sourceFrequencyList, sourceStatusList, sourceTypesList } from '../enums/data-source.enum';
 import { RpcException } from '@nestjs/microservices';
 import { HttpStatus } from '@nestjs/common';
-import { object } from "joi";
 
 export class CreateDataSourceDto {
 
