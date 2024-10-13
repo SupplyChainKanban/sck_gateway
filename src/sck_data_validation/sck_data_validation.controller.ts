@@ -27,7 +27,4 @@ export class SckDataValidationController {
       )
   }
 
-  // TODO: Realizar el cambio de estado de validation result
-
-
 }

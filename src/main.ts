@@ -38,12 +38,9 @@ async function main() {
 
   await app.startAllMicroservices();
 
-
   await app.listen(envs.port);
 
-
   logger.log(`Gateway running on port ${envs.port} `)
-
-
 }
+
 main();

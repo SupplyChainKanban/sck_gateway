@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Inject } from '@nestjs/common';
+import { Controller, Get, Inject } from '@nestjs/common';
 import { ClientProxy, MessagePattern, RpcException } from '@nestjs/microservices';
 import { catchError } from 'rxjs';
 import { SCK_NATS_SERVICE } from 'src/config';

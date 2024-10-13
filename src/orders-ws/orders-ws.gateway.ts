@@ -22,7 +22,6 @@ export class OrdersWsGateway implements OnGatewayConnection, OnGatewayDisconnect
 
   handleDisconnect(client: Socket) {
     this.ordersWsService.removeClient(client.id)
-    // console.log({ conectados: this.ordersWsService.getConnectedClients() })
     this.wss.emit('clients-updated', this.ordersWsService.getConnectedClients())
   }
 

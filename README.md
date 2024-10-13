@@ -22,7 +22,21 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Dev
+# Microservicios de Gateway
+
+En este microservicio se van a recibir todas las peticiones API Rest y se redirigirá a los microservicios necesarios.
+
+## Arquitectura del sistema
+
+![](diagrams/arquitecturaActualizada.drawio.png)
+
+## Flujo de datos
+
+![](diagrams/Ms_gateway.drawio.png)
+
+## Despliegue:
+
+### Dev
 
 1. Clonar el repositorio
 2. Instalar dependencias
@@ -40,7 +54,7 @@
   npm run start:dev
 ```
 
-## NATS
+### NATS
 
 - Sin el 62222
 
@@ -48,7 +62,7 @@
   docker run -d --name nats-main -p 4222:4222 -p 6222:6222 -p 8222:8222 nats
 ```
 
-## PROD
+### PROD
 
 ## Para construir la imagen de docker
 
